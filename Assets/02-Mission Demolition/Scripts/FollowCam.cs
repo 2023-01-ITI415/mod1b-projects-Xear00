@@ -7,7 +7,7 @@ public class FollowCam : MonoBehaviour
     static public GameObject POI;
 
     [Header("Dynamic")]
-    public float camZ = this.transform.position.z;
+    public float camZ;
 
     void Awake()
     {
