@@ -5,7 +5,6 @@ using UnityEngine;
 public class Goal : MonoBehaviour
 {
 	static public bool 	goalMet = false;
-	public bool checker = false;
 	void OnTriggerEnter(Collider other) {
 		// when the trigger is hit by something
 		// check to see if it's a Projectile 
@@ -13,7 +12,6 @@ public class Goal : MonoBehaviour
 		if (proj != null) {
 			// if so, set goalMet = true
 			Goal.goalMet = true;
-			checker = true;
 
 			// also set the alpha of the color of higher opacity
 			Material mat = GetComponent<Renderer>().material;
