@@ -36,7 +36,7 @@ public class Projectile : MonoBehaviour
         deltas.Add(deltaV3.magnitude);
         prevPos = transform.position;
 
-        while (deltas.Count < LOOKBACK_COUNT){
+        while (deltas.Count > LOOKBACK_COUNT){
             deltas.RemoveAt(0);
         }        
 
