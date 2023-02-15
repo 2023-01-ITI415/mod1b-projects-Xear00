@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private int count;
     public TextMeshProUGUI countText;
 
+    //Set up context for the rest of the script
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -27,7 +28,8 @@ public class PlayerMovement : MonoBehaviour
         movementX = movementVector.x;
         movementY = movementVector.y;
     }
-
+    
+    //Changes the score UI text
     void SetCountText()
     {
         countText.text = "Score: " + count.ToString();
@@ -38,11 +40,12 @@ public class PlayerMovement : MonoBehaviour
         Vector3 movement = new Vector3(movementX, movementY);
 
         //rb.AddForce(movement * speed);
-        rb.velocity = movement * speed; //Alternate speed control
+        rb.velocity = movement * speed; //Alternate speed control: IN USE
     }
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Pickup"))
+       //Deactivates Pickup on collision and adds to the score
+       if(other.gameObject.CompareTag("Pickup"))
         {
         other.gameObject.SetActive(false);
         count = count + 100;
