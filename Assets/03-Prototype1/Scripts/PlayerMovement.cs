@@ -13,12 +13,21 @@ public class PlayerMovement : MonoBehaviour
 
     private int count;
     public TextMeshProUGUI countText;
+    public TextMeshProUGUI finalScore;
+    public GameObject activeScore;
+    public GameObject endScreen;
+    public GameObject endBackground;
 
     //Set up context for the rest of the script
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         count = 0;
+
+        SetCountText();
+        endBackground.SetActive(false);
+        endScreen.SetActive(false);
+        activeScore.SetActive(true);
     }
 
     void OnMove(InputValue movementValue)
@@ -33,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
     void SetCountText()
     {
         countText.text = "Score: " + count.ToString();
+        finalScore.text = count.ToString();
     }
 
     void FixedUpdate()
