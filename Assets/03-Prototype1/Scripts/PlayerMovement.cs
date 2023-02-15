@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,10 +11,13 @@ public class PlayerMovement : MonoBehaviour
     public float movementY;
     private Rigidbody rb;
 
+    private int count;
+    public TextMeshProUGUI countText;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        
+        count = 0;
     }
 
     void OnMove(InputValue movementValue)
@@ -24,9 +28,10 @@ public class PlayerMovement : MonoBehaviour
         movementY = movementVector.y;
     }
 
-    //void OnRelease(InputValue movementValue){
-    //    movementX = 0.5;
-    //}
+    void SetCountText()
+    {
+        countText.text = "Score: " + count.ToString();
+    }
 
     void FixedUpdate()
     {
@@ -34,5 +39,14 @@ public class PlayerMovement : MonoBehaviour
 
         //rb.AddForce(movement * speed);
         rb.velocity = movement * speed; //Alternate speed control
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Pickup"))
+        {
+        other.gameObject.SetActive(false);
+        count = count + 100;
+        SetCountText();
+        }
     }
 }
