@@ -70,5 +70,12 @@ public class PlayerMovement : MonoBehaviour
         count = count - 300;
         SetCountText();
         }
+        if(other.gameObject.CompareTag("End"))
+        {
+        other.gameObject.SetActive(false);
+        endBackground.SetActive(true);
+        endScreen.SetActive(true);
+        activeScore.SetActive(false);
+        }
     }
 }
