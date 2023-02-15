@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
 
     private int count;
+    //All variables that correspond to other game elements
     public TextMeshProUGUI countText;
     public TextMeshProUGUI finalScore;
     public GameObject activeScore;
@@ -24,12 +25,14 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         count = 0;
 
+        //Resetting all text and UI elements
         SetCountText();
         endBackground.SetActive(false);
         endScreen.SetActive(false);
         activeScore.SetActive(true);
     }
 
+    //Acquiring Movement values from input   
     void OnMove(InputValue movementValue)
     {
         Vector2 movementVector = movementValue.Get<Vector2>();
@@ -59,6 +62,12 @@ public class PlayerMovement : MonoBehaviour
         {
         other.gameObject.SetActive(false);
         count = count + 100;
+        SetCountText();
+        }
+        if(other.gameObject.CompareTag("Enemy"))
+        {
+        other.gameObject.SetActive(false);
+        count = count - 300;
         SetCountText();
         }
     }
