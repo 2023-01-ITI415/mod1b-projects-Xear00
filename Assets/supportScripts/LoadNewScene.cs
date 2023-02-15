@@ -21,6 +21,16 @@ public class LoadNewScene : MonoBehaviour
         SceneManager.LoadScene("Main-Prototype 1");
     }
 
+    public void LoadSceneMain()
+    {
+        SceneManager.LoadScene("SceneMain");
+    }
+
+    public void LoadScene3Start()
+    {
+        SceneManager.LoadScene("Prototype-Menu");
+    }
+
     
 
 }
