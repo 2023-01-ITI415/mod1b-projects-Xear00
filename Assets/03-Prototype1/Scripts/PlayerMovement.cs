@@ -19,11 +19,20 @@ public class PlayerMovement : MonoBehaviour
     public GameObject endScreen;
     public GameObject endBackground;
 
+    public AudioSource pickupSFX;
+    public AudioSource enemySFX;
+
+    private MeshRenderer meshRenderer;
+    private Color origColor;
+    private float flashTime = .15f;
+
     //Set up context for the rest of the script
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         count = 0;
+        meshRenderer = GetComponent<MeshRenderer>();
+        origColor  = meshRenderer.material.color;
 
         //Resetting all text and UI elements
         SetCountText();
@@ -55,21 +64,37 @@ public class PlayerMovement : MonoBehaviour
         //rb.AddForce(movement * speed);
         rb.velocity = movement * speed; //Alternate speed control: IN USE
     }
+
+    void FlashStart()
+    {
+        meshRenderer.material.color = Color.cyan;
+        Invoke("FlashStop", flashTime);
+    }
+
+    void FlashStop()
+    {
+        meshRenderer.material.color = origColor;
+    }
     void OnTriggerEnter(Collider other)
     {
        //Deactivates Pickup on collision and adds to the score
        if(other.gameObject.CompareTag("Pickup"))
         {
+        pickupSFX.Play();
         other.gameObject.SetActive(false);
         count = count + 100;
         SetCountText();
         }
+        
         if(other.gameObject.CompareTag("Enemy"))
         {
+        enemySFX.Play();
+        FlashStart();
         other.gameObject.SetActive(false);
         count = count - 300;
         SetCountText();
         }
+        
         if(other.gameObject.CompareTag("End"))
         {
         other.gameObject.SetActive(false);
