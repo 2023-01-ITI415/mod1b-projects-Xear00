@@ -1,2 +1,1 @@
-# Module1-Projects
- ApplePicker, Mission Demolition and Prototype 1
+This was a simple "rail runner" inspired game, where you are following a set path and must collect points in order to collect the most. The level starts off easy, but gets harder at a sudden point to challenge players. The pickups will be moving towards the player at one speed, then towards the end it will get faster to really test the skill of the player.
